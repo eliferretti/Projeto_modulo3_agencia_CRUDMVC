@@ -1,0 +1,124 @@
+﻿@model CRUDMVC.Models.Pacote;
+
+@{
+    ViewData["Title"] = "Pacote";
+    var pacotes = ViewData["pacotes"] as List<Pacote>;
+}
+
+
+<div class="container">
+    <h1>Gerenciamento de Pacotes</h1>
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Pacotes Cadastrados</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Id Cliente</th>
+                        <th>Id Destino</th>
+                        <th>Data da compra</th>
+                        <th>Data da viagem</th>
+                        <th>Preço</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        foreach (var pacote in pacotes)
+                        {
+                            <tr>
+                                <td>@pacote.Id</td>
+                                <td>@pacote.Id_cliente</td>
+                                <td>@pacote.Id_destino</td>
+                                <td>@pacote.DataCompra</td>
+                                <td>@pacote.DataViagem</td>
+                                <td>@pacote.Preco</td>
+                                <td style="text-align:right; width:20%">
+                                <form asp-controller="Pacote" asp-action="Deletar">
+                                    <button class="btn btn-danger" type="submit">X</button>
+                                    <input asp-for="Id" style="visibility:hidden; display:none;" type="text" value="@pacote.Id">
+                                </form>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+            <br /><br /><br />
+            <h2>Cadastrar</h2>
+            <form asp-controller="Pacote" asp-action="Index">
+                <div class="form-row">
+                    <div class="form-group col-md-2">
+                        <label for="">Id do cliente</label>
+                        <input asp-for="Id_cliente" type="text" class="form-control" id="" placeholder="Id do cliente">
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="">Id do destino</label>
+                        <input asp-for="Id_destino" type="text" class="form-control" id="" placeholder="id do destino">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="">Data da compra</label>
+                        <input asp-for="DataCompra" type="date" class="form-control" id="">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="">Data da viagem</label>
+                        <input asp-for="DataViagem" type="date" class="form-control" id="">
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="">Preço</label>
+                        <input asp-for="Preco" type="text" class="form-control" id="" placeholder="Preço do pacote">
+                    </div>
+
+                </div>
+                <button type="submit" class="btn btn-success">Incluir</button>
+            </form>
+            
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            
+            <h2>Atualizar Dados</h2>
+            <form asp-controller="Pacote" asp-action="Atualizar">
+
+                <div class="form-row">
+                    <div class="form-group col-md-2">
+                        <label for="">Código do pacote</label>
+                        <select class="custom-select" asp-for="Id">
+                            <option selected>-- Selecione um código</option>
+                            @{
+                                foreach (var pacote in pacotes)
+                                {
+                                    <option>@pacote.Id</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="">Id do cliente</label>
+                        <input asp-for="Id_cliente" type="text" class="form-control" id="" placeholder="Id do cliente">
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="">Id do destino</label>
+                        <input asp-for="Id_destino" type="text" class="form-control" id="" placeholder="Id do pacote">
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="">Data da compra</label>
+                        <input asp-for="DataCompra" type="date" class="form-control" id="">
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="">Data da viagem</label>
+                        <input asp-for="DataViagem" type="date" class="form-control" id="">
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="">Preço</label>
+                        <input asp-for="Preco" type="text" class="form-control" id="" placeholder="Preço do pacote">
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Atualizar</button>
+            </form>
+            <br />
+        </div>
+    </div>
+</div>
